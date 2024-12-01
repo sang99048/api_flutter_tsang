@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thêm Thông Báo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    input[type="text"], input[type="date"], input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .form-container .input-group {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Thêm Thông Báo</h2>
+    <form action="/thongbao/add" method="POST" enctype="multipart/form-data">
+      <div class="input-group">
+        <label for="tieude">Tiêu đề:</label>
+        <input type="text" id="tieude" name="tieude" required>
+      </div>
+
+      <div class="input-group">
+        <label for="title">Tiêu đề phụ:</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+
+      <div class="input-group">
+        <label for="date">Ngày:</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <div class="input-group">
+        <label for="image">Hình ảnh:</label>
+        <input type="file" id="image" name="image">
+      </div>
+
+      <button type="submit">Thêm Thông Báo</button>
+    </form>
+  </div>
+</body>
+</html>

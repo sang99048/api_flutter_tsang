@@ -1,0 +1,30 @@
+[
+    {
+      "imageUrl": "assets/images/Mask Group 4.png",
+      "title": "Da Nang - Ba Na - Hoi An",
+      "date": "Jan 30, 2020",
+      "price": "$400.00",
+      "days": "3 days"
+    },
+    {
+      "imageUrl": "assets/images/Mask Group 5.png",
+      "title": "Melbourne - Sydney",
+      "date": "Jun 30, 2020",
+      "price": "$600.00",
+      "days": "5 days"
+    },
+    {
+      "imageUrl": "assets/images/Mask Group 6.png",
+      "title": "Hanoi - Ha Long Bay",
+      "date": "Jan 28, 2020",
+      "price": "$300.00",
+      "days": "3 days"
+    },    {
+        "imageUrl": "assets/images/1.jpg",
+        "title": "Minh Nguyêt - Đà Nẵng",
+        "date": "Jan 28, 2020",
+        "price": "$300.00",
+        "days": "3 days"
+      }
+  ]
+  

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    /* Body Styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f8f9fa;
+    }
+
+    /* Main Content Container */
+    .main-content {
+      display: flex;
+      width: 100%;
+      margin-left: 250px; /* To account for sidebar width */
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #2d3e50;
+      padding: 20px;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar h2 {
+      color: #ffc107; /* Màu vàng của tiêu đề */
+      font-size: 20px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+
+    .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: #dcdcdc; /* Màu chữ mặc định */
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar ul li a i {
+      font-size: 18px;
+      margin-right: 10px; /* Khoảng cách giữa icon và chữ */
+    }
+
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active {
+      background-color: #ffc107; /* Màu nền khi hover/active */
+      color: #2d3e50; /* Màu chữ khi hover/active */
+    }
+
+    .sidebar ul li a.logout:hover {
+      background-color: #e74c3c; /* Màu nền khi hover cho Logout */
+      color: white; /* Màu chữ khi hover cho Logout */
+    }
+
+    /* Content Area Styling */
+    .container {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .btn-edit, .btn-delete {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    .btn-edit {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-delete {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background-color: #c82333;
+    }
+
+    .btn-group {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .add-button {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Admin Dashboard</h2>
+    <ul>
+      <li>
+        <a href="/admin" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
+      </li>
+      <li>
+        <a href="/travel-news" class="nav-link active"><i class="fas fa-newspaper"></i> Travel News</a>
+      </li>
+      <li>
+        <a href="/thongbao" class="nav-link"><i class="fas fa-bell"></i> Notifications</a>
+      </li>
+      <li>
+        <a href="/tour-news" class="nav-link"><i class="fas fa-map"></i> Tour News</a>
+      </li>
+      <li>
+        <a href="/users" class="nav-link"><i class="fas fa-users"></i> Users</a>
+      </li>
+      <li>
+        <a href="/logout" class="nav-link logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <h1 class="text-center">Danh Sách Tin Tức Du Lịch</h1>
+      <a href="/travel-news/add" class="btn btn-success add-button"><i class="fas fa-plus"></i> Thêm Tin Tức</a>
+
+      <div class="row">
+        <% news.forEach(item => { %>
+          <div class="col-md-4 col-sm-6 col-12">
+            <div class="card">
+              <img src="<%= item.imageUrl || '/default-image.jpg' %>" class="card-img-top" alt="<%= item.title %>">
+              <div class="card-body">
+                <h5 class="card-title"><%= item.title %></h5>
+                <p class="card-text">Ngày: <%= item.date %></p>
+                <p class="card-text"><%= item.shortDescription %></p>
+                <div class="btn-group">
+                  <a href="/travel-news/edit/<%= item._id %>" class="btn btn-edit"><i class="fas fa-edit"></i> Sửa</a>
+                  <form action="/travel-news/delete/<%= item._id %>" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-delete" onclick="return confirmDelete(event)"> 
+                      <i class="fas fa-trash"></i> Xóa
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function confirmDelete(event) {
+      event.preventDefault();
+      Swal.fire({
+        title: 'Bạn có chắc chắn muốn xóa?',
+        text: "Hành động này không thể hoàn tác!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Xóa',
+        cancelButtonText: 'Hủy'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          event.target.closest('form').submit();
+        }
+      });
+    }
+  </script>
+</body>
+</html>

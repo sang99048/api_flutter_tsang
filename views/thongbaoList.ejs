@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách Thông Báo</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #eaf2f8; /* Màu nền nhẹ nhàng */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      padding-top: 20px;
+    }
+
+    .container {
+      background-color: #ffffff; /* Nền trắng cho container */
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 700px;
+      margin: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .add-notification {
+      display: block;
+      text-align: right;
+      margin-bottom: 25px;
+    }
+
+    .add-notification button {
+      background-color: #ff9f43; /* Màu cam tươi sáng */
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 16px;
+    }
+
+    .add-notification button:hover {
+      background-color: #e67e22; /* Màu cam đậm khi hover */
+    }
+
+    .notification-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .notification-item {
+      background-color: #f6f8fa; /* Nền nhẹ cho các mục thông báo */
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .notification-item:hover {
+      transform: translateY(-5px); /* Hiệu ứng di chuyển khi hover */
+    }
+
+    .notification-item h2 {
+      margin: 0;
+      color: #16a085; /* Màu xanh lá nhẹ nhàng cho tiêu đề */
+      font-size: 20px;
+    }
+
+    .notification-item p {
+      margin: 10px 0;
+      color: #2794ec;
+      font-size: 14px;
+    }
+
+    .notification-actions {
+      display: flex;
+      justify-content: flex-end; /* Canh các nút về phía bên phải */
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .notification-actions a {
+      color: #1d91df; /* Màu xanh dương cho nút chỉnh sửa */
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .notification-actions a:hover {
+      color: #2980b9; /* Màu xanh dương đậm khi hover */
+    }
+
+    .delete-button {
+      background-color: #e74c3c; /* Màu đỏ cho nút xóa */
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .delete-button:hover {
+      background-color: #c0392b; /* Màu đỏ đậm khi hover */
+    }
+
+    /* Modal Confirmation */
+    .confirmation-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .confirmation-box {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .confirmation-box button {
+      padding: 12px 25px;
+      font-size: 16px;
+      margin: 15px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .confirm-btn {
+      background-color: #e74c3c; /* Màu đỏ cho xác nhận */
+      color: white;
+    }
+
+    .confirm-btn:hover {
+      background-color: #c0392b;
+    }
+
+    .cancel-btn {
+      background-color: #3498db; /* Màu xanh cho hủy */
+      color: white;
+    }
+
+    .cancel-btn:hover {
+      background-color: #2980b9;
+    }
+
+    /* Media Queries cho màn hình nhỏ */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .add-notification button {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .notification-item h2 {
+        font-size: 18px;
+      }
+
+      .add-notification button {
+        font-size: 12px;
+      }
+    }
+  </style>
+  <script>
+    function confirmDelete(event) {
+      event.preventDefault();  // Ngừng hành động mặc định (điều hướng trang)
+      const confirmationModal = document.getElementById('confirmationModal');
+      confirmationModal.style.display = 'flex';
+      const deleteUrl = event.target.closest('a').href;  // Lấy URL xóa từ thẻ <a>
+
+      // Xử lý khi nhấn "Xóa" trong modal
+      document.getElementById('confirmDeleteBtn').onclick = function() {
+        window.location.href = deleteUrl; // Điều hướng đến URL để xóa thông báo
+      };
+
+      // Xử lý khi nhấn "Hủy" trong modal
+      document.getElementById('cancelDeleteBtn').onclick = function() {
+        confirmationModal.style.display = 'none'; // Đóng modal khi hủy
+      };
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Danh sách Thông Báo</h1>
+    <div class="add-notification">
+      <a href="/thongbao/add">
+        <button>Thêm Thông Báo</button>
+      </a>
+    </div>
+    <ul class="notification-list">
+      <% thongbaos.forEach(thongbao => { %>
+        <li class="notification-item">
+          <div>
+            <h2><%= thongbao.tieude %></h2>
+            <p><%= thongbao.title %></p>
+            <p><%= thongbao.date %></p>
+          </div>
+          <div class="notification-actions">
+            <a href="/thongbao/edit/<%= thongbao._id %>">
+              <button>Chỉnh sửa</button>
+            </a>
+            <a href="/thongbao/delete/<%= thongbao._id %>" onclick="confirmDelete(event)">
+              <button class="delete-button">Xóa</button>
+            </a>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+
+  <!-- Modal Xác Nhận Xóa -->
+  <div id="confirmationModal" class="confirmation-modal">
+    <div class="confirmation-box">
+      <h3>Bạn có chắc chắn muốn xóa thông báo này?</h3>
+      <button id="confirmDeleteBtn" class="confirm-btn">Xóa</button>
+      <button id="cancelDeleteBtn" class="cancel-btn">Hủy</button>
+    </div>
+  </div>
+</body>
+</html>

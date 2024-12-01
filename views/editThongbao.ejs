@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chỉnh sửa Thông Báo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      max-width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #555;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    input[type="file"]:focus {
+      border-color: #4A90E2;
+      outline: none;
+    }
+
+    button {
+      background-color: #4A90E2;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      width: 100%;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #357ABD;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .form-footer a {
+      color: #4A90E2;
+      text-decoration: none;
+    }
+
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .image-preview {
+      margin-top: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Chỉnh sửa Thông Báo</h1>
+    <form action="/thongbao/edit/<%= thongbao._id %>" method="POST" enctype="multipart/form-data">
+      <label for="tieude">Tiêu đề:</label>
+      <input type="text" id="tieude" name="tieude" value="<%= thongbao.tieude %>" required>
+
+      <label for="title">Tiêu đề phụ:</label>
+      <input type="text" id="title" name="title" value="<%= thongbao.title %>" required>
+
+      <label for="date">Ngày:</label>
+      <input type="date" id="date" name="date" value="<%= thongbao.date %>" required>
+
+      <label for="image">Hình ảnh:</label>
+      <input type="file" id="image" name="image">
+
+      <% if (thongbao.image) { %>
+        <div class="image-preview">
+          <p><strong>Hình ảnh hiện tại:</strong></p>
+          <img src="<%= thongbao.image %>" alt="Hình ảnh hiện tại" width="100%">
+        </div>
+      <% } %>
+
+      <button type="submit">Cập nhật</button>
+    </form>
+
+    <div class="form-footer">
+      <p><a href="/thongbao">Trở lại danh sách thông báo</a></p>
+    </div>
+  </div>
+</body>
+</html>

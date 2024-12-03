@@ -1,30 +1,27 @@
 [
-    {
-      "imageUrl": "assets/images/Mask Group 4.png",
-      "title": "Da Nang - Ba Na - Hoi An",
-      "date": "Jan 30, 2020",
-      "price": "$400.00",
-      "days": "3 days"
-    },
-    {
-      "imageUrl": "assets/images/Mask Group 5.png",
-      "title": "Melbourne - Sydney",
-      "date": "Jun 30, 2020",
-      "price": "$600.00",
-      "days": "5 days"
-    },
-    {
-      "imageUrl": "assets/images/Mask Group 6.png",
-      "title": "Hanoi - Ha Long Bay",
-      "date": "Jan 28, 2020",
-      "price": "$300.00",
-      "days": "3 days"
-    },    {
-        "imageUrl": "assets/images/1.jpg",
-        "title": "Minh Nguyêt - Đà Nẵng",
-        "date": "Jan 28, 2020",
-        "price": "$300.00",
-        "days": "3 days"
-      }
-  ]
-  
+  {
+    "imageUrl": "https://ik.imagekit.io/tvlk/blog/2023/02/dai-noi-hue-1.jpg?tr=dpr-2,w-675",
+    "title": "Explore the Beauty of Hue City",
+    "date": "Mar 15, 2021"
+  },
+  {
+    "imageUrl": "https://th.bing.com/th/id/OIP.6lPH23jzOGF3C7ss31ajAAHaE8?rs=1&pid=ImgDetMain", 
+    "title": "Summer Deals in Phu Quoc",
+    "date": "Jun 20, 2021"
+  },
+  {
+    "imageUrl": "https://th.bing.com/th/id/R.acb6baa91d46b02b197b9e602ba74425?rik=cty%2bEu3pIlFSvw&pid=ImgRaw&r=0",
+    "title": "Discover the Mountains of Sapa",
+    "date": "Sep 12, 2021"
+  },
+  {
+    "imageUrl": "https://th.bing.com/th/id/OIP.X_kS86lvKovqm0YU9f101wHaEP?rs=1&pid=ImgDetMain",
+    "title": "Golden Bridge in Ba Na Hills",
+    "date": "Apr 8, 2022"
+  },
+  {
+    "imageUrl": "https://th.bing.com/th/id/R.e1242d50f245c24e74fd97d4561d650c?rik=WknS4456yozc9A&riu=http%3a%2f%2fvietnam-online.org%2fwp-content%2fuploads%2f2020%2f07%2fhoi-an-ve-dem-1-1582879781297957162122.gif&ehk=HRKe%2bZbRQj2d2DDfb7G%2f6F68yC6NY4qy8ZIwuEoi3Is%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+    "title": "Unforgettable Experiences in Hoi An",
+    "date": "Dec 25, 2022"
+  }
+]
